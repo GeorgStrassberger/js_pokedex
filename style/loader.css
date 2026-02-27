@@ -29,7 +29,7 @@
     width: 250px;
     height: 250px;
     margin: auto;
-    /* background-image: url('../img/logo.png'); */
+    /* background-image: url('../assets/img/logo.png'); */
     background-size: contain;
     background-repeat: no-repeat;
     filter: invert(96%);
