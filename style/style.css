@@ -1,58 +1,139 @@
 * {
-	margin: 0;
-	box-sizing: border-box;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-start: #e7efff;
+  --bg-end: #cfdfff;
+  --surface: rgba(255, 255, 255, 0.72);
+  --surface-strong: rgba(255, 255, 255, 0.9);
+  --text: #14213d;
+  --muted: #52617a;
+  --accent: #e5484d;
+  --accent-dark: #a3202a;
+  --line: rgba(20, 33, 61, 0.12);
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+  --shadow-lg: 0 24px 50px rgba(15, 23, 42, 0.18);
+  --shadow-md: 0 12px 30px rgba(15, 23, 42, 0.12);
+  --poke-yellow: #ffcc01;
+  --poke-blue: #2f56a5;
+  --brand-blue-1: #2f58aa;
+  --brand-blue-2: #183775;
+  --brand-blue-3: #102650;
 }
 
 body {
-	font-family: "Pokemon Solid", sans-serif;
-	font-weight: normal;
-	line-height: 16px;
-	letter-spacing: 2px;
-	display: flex;
-	flex-direction: column;
-	height: 100dvh;
-	background-color: whitesmoke;
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  color: var(--text);
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.95) 0%, transparent 38%),
+    radial-gradient(circle at 85% 20%, rgba(255, 204, 1, 0.18) 0%, transparent 26%),
+    radial-gradient(circle at 78% 82%, rgba(47, 86, 165, 0.18) 0%, transparent 35%),
+    linear-gradient(150deg, var(--bg-start), var(--bg-end));
+  background-attachment: fixed;
 }
 
 main {
-	flex: 1 0 auto;
+  flex: 1 0 auto;
+  width: min(1240px, 100% - 2.5rem);
+  margin-inline: auto;
+  padding: 1.2rem 0 2rem;
 }
 
-.pokefont {
-	font-family: "Pokemon Solid", sans-serif;
-	color: #ffcc01;
-	text-shadow: 4px 0 #395ba8, -4px 0 #395ba8, 0 4px #395ba8, 0 -4px #395ba8, 1px 1px #395ba8, -1px 1px #395ba8, 1px 1px #395ba8, 1px -1px #395ba8, 2px 2px #395ba8, -2px -2px #395ba8, 2px -2px #395ba8, -2px 2px #395ba8, 3px 3px #395ba8, -3px -3px #395ba8, 3px -3px #395ba8, -3px 3px #395ba8;
+.pokefont,
+.pokeFontColor {
+  font-family: "Pokemon Solid", sans-serif;
+  letter-spacing: 0.12em;
+  color: #ffcc01;
+  text-shadow: 3px 0 #395ba8, -3px 0 #395ba8, 0 3px #395ba8, 0 -3px #395ba8,
+    2px 2px #395ba8, -2px -2px #395ba8;
 }
 
 .link {
-	padding: 6px 24px;
-	text-decoration: none;
-	font-size: 1rem;
-	cursor: pointer;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.75rem 1.25rem;
+  border: 2px solid #101828;
+  border-radius: 999px;
+  text-decoration: none;
+  font-family: "Pokemon Solid", sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  color: var(--poke-yellow);
+  text-shadow: 3px 0 var(--poke-blue), -3px 0 var(--poke-blue), 0 3px var(--poke-blue), 0 -3px var(--poke-blue),
+    2px 2px var(--poke-blue), -2px -2px var(--poke-blue);
+  background: linear-gradient(180deg, #ef4444 0 48%, #111827 48% 52%, #f8fafc 52% 100%);
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.25);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 
 .link:hover {
-	opacity: 0.8;
-	transform: scale(1.05);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  filter: saturate(1.08);
+}
+
+.link:active {
+  transform: translateY(0) scale(0.99);
+}
+
+#fav-link {
+  min-width: 9rem;
 }
 
 @media only screen and (max-width: 1000px) {
-	#fav-link {
-		display: none;
-	}
+  #fav-link {
+    display: none;
+  }
+
+  main {
+    width: min(1120px, 100% - 1.6rem);
+  }
 }
 
 @media only screen and (max-width: 800px) {
-	#selcet-field {
-		display: none;
-	}
+  #selcet-field {
+    display: none;
+  }
+
+  main {
+    width: min(1024px, 100% - 1.2rem);
+    padding-top: 0.8rem;
+  }
 }
 
 @media only screen and (max-width: 520px) {
-	.header {
-		flex-direction: column;
-		gap: 1rem;
-	}
-}
+  body {
+    letter-spacing: 0;
+  }
 
-@media only screen and (max-width: 300px) {}
+  main {
+    width: calc(100% - 0.8rem);
+    padding-bottom: 1.2rem;
+  }
+
+  .link {
+    width: 100%;
+  }
+
+  #fav-link {
+    display: inline-flex;
+  }
+
+  #selcet-field {
+    display: flex;
+  }
+}

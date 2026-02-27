@@ -1,10 +1,8 @@
 .pokeFontColor {
   font-weight: normal;
   color: #ffcc01;
-  text-shadow: 4px 0 #395ba8, -4px 0 #395ba8, 0 4px #395ba8, 0 -4px #395ba8,
-    1px 1px #395ba8, -1px 1px #395ba8, 1px 1px #395ba8, 1px -1px #395ba8,
-    2px 2px #395ba8, -2px -2px #395ba8, 2px -2px #395ba8, -2px 2px #395ba8,
-    3px 3px #395ba8, -3px -3px #395ba8, 3px -3px #395ba8, -3px 3px #395ba8;
+  text-shadow: 3px 0 #395ba8, -3px 0 #395ba8, 0 3px #395ba8, 0 -3px #395ba8,
+    2px 2px #395ba8, -2px -2px #395ba8;
 }
 
 .d-none {

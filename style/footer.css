@@ -1,19 +1,35 @@
 .footer {
-  padding: 1.5rem 2rem;
-  background-color: tomato;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
+  padding: 1rem;
+  background: linear-gradient(105deg, rgba(24, 55, 117, 0.95), rgba(16, 38, 80, 0.94));
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 -10px 24px rgba(9, 19, 44, 0.26);
   flex: 0 0 auto;
   display: flex;
-  flex-direction: row;
+  gap: 0.8rem;
   align-items: center;
-  justify-content: space-evenly;
-
+  justify-content: center;
 }
 
-.footer__link {
-  padding: 6px 24px;
-  text-decoration: none;
-  font-size: 1rem;
-  cursor: pointer;
+#morePokemonsBtn,
+#allPokemonsBtn {
+  min-width: 9rem;
+}
+
+@media only screen and (max-width: 680px) {
+  .footer {
+    flex-direction: column;
+    padding: 0.75rem;
+    border-radius: 14px 14px 0 0;
+  }
+
+  .footer .link {
+    width: min(360px, 100%);
+  }
+}
+
+#morePokemonsBtn:hover,
+#allPokemonsBtn:hover {
+  transform: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.34), 0 10px 22px rgba(15, 23, 42, 0.28);
+  filter: brightness(1.05);
 }

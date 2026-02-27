@@ -1,149 +1,221 @@
 .mainframe {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.2rem;
+  background: radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.95) 0%, transparent 38%),
+    radial-gradient(circle at 85% 20%, rgba(255, 204, 1, 0.18) 0%, transparent 26%),
+    radial-gradient(circle at 78% 82%, rgba(47, 86, 165, 0.18) 0%, transparent 35%),
+    linear-gradient(150deg, var(--bg-start), var(--bg-end));
+  background-attachment: fixed;
+  backdrop-filter: blur(6px);
 }
 
 .card {
-    position: relative;
-    height: 620px;
-    width: 320px;
-    border-radius: 24px;
-    background-image: linear-gradient(145deg, rgba(255, 255, 255, 0.5), transparent 30%);
-    background-repeat: no-repeat;
-    background-position: center center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(420px, 100%);
+  max-height: calc(100dvh - 2.4rem);
+  border-radius: 28px;
+  background-image: linear-gradient(155deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.04));
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
 }
 
 .card__header {
-    padding-top: 24px;
-    padding-left: 24px;
-    padding-right: 24px;
-    display: flex;
-    flex-direction: column;
-    position: relative;
+  position: relative;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 330px;
 }
 
 .card__header-btn {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 16px;
-    z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.8rem;
+  z-index: 2;
 }
 
 .card__header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
 }
 
 .card__header-info {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
 }
 
 .card__header-name {
-    font-size: 1.5rem;
-    font-weight: normal;
-    padding-bottom: 16px;
+  font-size: clamp(1.35rem, 5.2vw, 1.85rem);
+  font-weight: normal;
+  line-height: 1;
 }
 
 .card__header-types {
-    display: flex;
-    flex-direction: row;
-    gap: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .card__header-type {
-    border: 1px dotted black;
-    padding: 16px;
-    border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  padding: 0.5rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: #fff;
 }
 
-
 .card__header-images {
-    padding-top: 8px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 140px;
-    box-sizing: border-box;
+  padding-top: 0.7rem;
+  padding-bottom: 0.75rem;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  min-height: 210px;
+  max-height: 245px;
+  height: 210px;
+  flex: 1;
 }
 
 .pokeImgBG {
-    position: absolute;
-    z-index: 3;
-    height: 100%;
+  position: absolute;
+  z-index: 1;
+  width: min(78%, 250px);
+  max-width: 270px;
+  opacity: 0.55;
+  max-height: 92%;
 }
 
 .pokeImg {
-    position: absolute;
-    z-index: 4;
-    height: 100%;
-    bottom: 8px;
+  position: relative;
+  z-index: 2;
+  width: min(72%, 250px);
+  height: auto;
+  min-height: 140px;
+  max-width: 250px;
+  max-height: 210px;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.3));
 }
 
 .backgroundCard {
-    background-image: url(../img/pokemonball.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+  background: radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.95) 0%, transparent 38%),
+    radial-gradient(circle at 85% 20%, rgba(255, 204, 1, 0.18) 0%, transparent 26%),
+    radial-gradient(circle at 78% 82%, rgba(47, 86, 165, 0.18) 0%, transparent 35%),
+    linear-gradient(150deg, var(--bg-start), var(--bg-end));
+  background-attachment: fixed;
 }
 
-/*############## Zweiter Bereich ######################*/
-
 .statsframe {
-    position: absolute;
-    bottom: 0;
-    border-radius: 24px;
-    background-color: aliceblue;
-    height: 340px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
+  position: relative;
+  width: 100%;
+  z-index: 5;
+  flex: 0 0 auto;
+  min-height: 320px;
+  border-radius: 28px 28px 0 0;
+  background: rgba(247, 251, 255, 0.97);
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 -14px 26px rgba(15, 23, 42, 0.12);
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0.9rem 1.2rem;
 }
 
 .statsContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    width: 80%;
-    margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  width: 100%;
+  color: #0f172a;
 }
 
 .linkframe {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    border-bottom: gray 1px solid;
-    width: 100%;
-    padding-bottom: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.15);
+  padding-bottom: 0.55rem;
+  margin-bottom: 0.6rem;
+  font-family: "Chakra Petch", "Segoe UI", sans-serif;
 }
 
 .linkframe span {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .linkframe span:hover {
-    font-weight: bolder;
+  color: #111827;
+  font-weight: 700;
+}
+
+.tableContainer {
+  overflow: auto;
+  flex: 1;
+  min-height: 220px;
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
 }
 
 tr {
-    height: 40px;
+  height: 36px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 td {
-    min-width: 120px;
+  min-width: 0;
+  padding: 0.25rem 0.4rem;
+}
+
+td:first-child {
+  color: #64748b;
+}
+
+@media only screen and (max-width: 720px) {
+  .mainframe {
+    padding: 0.45rem;
+  }
+
+  .card {
+    width: 100%;
+    max-height: calc(100dvh - 0.9rem);
+    border-radius: 20px;
+  }
+
+  .card__header {
+    min-height: 280px;
+    padding: 0.95rem;
+  }
+
+  .card__header-images {
+    min-height: 185px;
+    max-height: 210px;
+    height: 185px;
+  }
+
+  .statsframe {
+    min-height: 300px;
+    border-radius: 20px 20px 0 0;
+    padding: 0.75rem;
+  }
+
+  .linkframe {
+    gap: 0.8rem;
+  }
 }

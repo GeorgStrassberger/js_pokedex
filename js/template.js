@@ -1,31 +1,28 @@
 "use strict";
 
 function pokemonCartHTML(currentPokemon) {
-	return `
-    <div id="${currentPokemon["name"]}" class="pokemon-cart ${
-		currentPokemon["types"][0]["type"]["name"]
-	}" onclick="openPokemonCart(${currentPokemon["id"] - 1})">
+    return `
+    <div id="${currentPokemon["name"]}" class="pokemon-cart ${currentPokemon["types"][0]["type"]["name"]
+        }" onclick="openPokemonCart(${currentPokemon["id"] - 1})">
         <div class="cartHeader">
             <div class="cardnr pokefont">#${leftFillNum(
-							currentPokemon.id,
-							3
-						)}</div>
+            currentPokemon.id,
+            3
+        )}</div>
             <div class="cardname pokeFontColor">${currentPokemon["name"]}</div>
         </div>
         <div id="TypesFrom${currentPokemon["name"]}" class="pokemonTypes">
-            <span class="pokemonType">${
-							currentPokemon["types"][0]["type"]["name"]
-						}</span>
+            <span class="pokemonType">${currentPokemon["types"][0]["type"]["name"]
+        }</span>
         </div>
-        <img class="pokemonImage" src="${
-					currentPokemon["sprites"]["front_shiny"]
-				}" alt="PokemonImage">
+        <img class="pokemonImage" src="${currentPokemon["sprites"]["front_shiny"]
+        }" alt="PokemonImage">
     </div>
     `;
 }
 
 function renderSinglePokemonCartInfoTableAbout(i) {
-	document.getElementById("tableAbout").innerHTML = /*html*/ `
+    document.getElementById("tableAbout").innerHTML = /*html*/ `
                     <tr>
                         <td>Species</td>
                         <td>${myPokemonArray[i]["types"][0]["type"]["name"]}</td>
@@ -46,7 +43,7 @@ function renderSinglePokemonCartInfoTableAbout(i) {
 }
 
 function renderSinglePokemonCartInfoTableBaseStats(i) {
-	document.getElementById("tableBaseStats").innerHTML = /*html*/ `
+    document.getElementById("tableBaseStats").innerHTML = /*html*/ `
                 <tr class="uppercase">
                     <td>${myPokemonArray[i]["stats"][0]["stat"]["name"]}</td>
                     <td>${myPokemonArray[i]["stats"][0]["base_stat"]}</td>
@@ -75,12 +72,12 @@ function renderSinglePokemonCartInfoTableBaseStats(i) {
 }
 
 function renderSinglePokemonCart(i) {
-	document.getElementById("mainframe").innerHTML = `
+    document.getElementById("mainframe").innerHTML = `
     <div id="cartframe" class="card ${myPokemonArray[i]["types"][0]["type"]["name"]}">
         <div class="card__header">
             <div class="card__header-btn">
-                <img class="card-btn-close" src="../img/icons/x-mark-48.png" alt="arrowback" onclick="closePokemonCart()">
                 <img class="card-btn-like" id="like_${myPokemonArray[i]["name"]}" src="../img/icons/favorite-3-24.png" alt="heart" onclick="like(${i})">
+                <img class="card-btn-close" src="../img/icons/x-mark-48.png" alt="arrowback" onclick="closePokemonCart()">
             </div>
             <div class="card__header-content">
                 <div class="card__header-info">
@@ -102,12 +99,10 @@ function renderSinglePokemonCart(i) {
                     <img src="../img/icons/arrow-4-48.png">                
                 </div>
 
-                <img class="pokeImgBG" src="../img/pokemonball-draw.png" alt="pokeball"        >
+                <img class="pokeImgBG" src="../img/pokemonball-draw.png" alt="pokeball">
                 <img id="pokeImg" class="pokeImg" src="../img/pokemon-1536848_640.png" alt="PokeImage">
             </div>
         </div>
-        
-                            <!--der Weiße bereich-->
         <div class="statsframe">
             <div class="statsContainer">
                 <div class="linkframe">
@@ -171,7 +166,7 @@ function renderSinglePokemonCart(i) {
 }
 
 function renderLoadingButten() {
-	document.getElementById(
-		"morePokemonsBtn"
-	).innerText = `+ ${loadMorePokemons} Pokemons`;
+    document.getElementById(
+        "morePokemonsBtn"
+    ).innerText = `+ ${loadMorePokemons} Pokemons`;
 }
