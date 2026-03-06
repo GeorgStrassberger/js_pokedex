@@ -9,7 +9,7 @@ let loadMorePokemons = 20;
 /** Startindex (inklusive) für den nächsten API-Ladeblock. */
 let minCountOfPokemons = 1;
 /** Endindex (exklusive) für den nächsten API-Ladeblock. */
-let maxCountentOfPokemons = 21;
+let maxCountOfPokemons = 21;
 /** Sperre für parallele Ladeaufrufe (z. B. bei schnellem Mehrfachklick). */
 let isLoading = false;
 
@@ -35,7 +35,7 @@ async function loadPokedex() {
   isLoading = true;
   try {
     const indexes = [];
-    for (let index = minCountOfPokemons; index < maxCountentOfPokemons; index++) {
+    for (let index = minCountOfPokemons; index < maxCountOfPokemons; index++) {
       indexes.push(index);
     }
 
@@ -68,7 +68,7 @@ async function loadPokedex() {
  * Re-render der Hauptansicht nach Datenupdates (laden, sortieren, etc.).
  */
 function renderContent() {
-  renderLoadingButten();
+  renderLoadingButton();
   closePokemonCart();
   renderPokemonCarts();
   hideLoadingScreen();
@@ -87,8 +87,13 @@ function renderPokemonCarts() {
  * @param {object} currentPokemon Pokemon-Datenobjekt aus der API.
  */
 function renderPokemonTypes(currentPokemon) {
-  let pokeTypes = currentPokemon["types"];
-  document.getElementById("TypesFrom" + currentPokemon["name"]).innerHTML = ``;
+  const typesContainer = document.getElementById("TypesFrom" + currentPokemon["name"]);
+  if (!typesContainer) {
+    return;
+  }
+
+  typesContainer.innerHTML = "";
+  const pokeTypes = currentPokemon["types"];
   for (let i = 0; i < pokeTypes.length; i++) {
     const type = pokeTypes[i];
     showPokemonTypeImg(type, currentPokemon);

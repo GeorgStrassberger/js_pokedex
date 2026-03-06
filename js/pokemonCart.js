@@ -10,8 +10,8 @@ function openPokemonCart(i) {
   document.getElementById("pokedex").classList.add("d-none");
   document.getElementById("mainframe").classList.remove("d-none");
   document.title = `${myPokemonArray[i]["name"]}`;
-  document.getElementById("about").style.color = "grey";
   renderSinglePokemonCartInfo(i);
+  showBaseStats();
 
   hideElement("header");
   hideElement("footer");
@@ -55,19 +55,19 @@ function renderSinglePokemonCartInfo(i) {
   checkPokemonInArray(i);
   renderSinglePokemonCartInfoTableAbout(i);
   renderSinglePokemonCartInfoTableBaseStats(i);
-  renderSingelPokemonCartTypes(i);
+  renderSinglePokemonCartTypes(i);
 }
 
 /**
  * Rendert die Typ-Badges im Header der Detailkarte.
  * @param {number} i Index in `myPokemonArray`.
  */
-function renderSingelPokemonCartTypes(i) {
+function renderSinglePokemonCartTypes(i) {
   document.getElementById("pokeTypes").innerHTML = ``;
   for (let j = 0; j < myPokemonArray[i]["types"].length; j++) {
-    const singelCartType = myPokemonArray[i]["types"][j];
+    const singleCartType = myPokemonArray[i]["types"][j];
     document.getElementById("pokeTypes").innerHTML += /*html*/ `
-    <span class="card__header-type pokeFontColor ${singelCartType["type"]["name"]}">${singelCartType["type"]["name"]}</span>
+    <span class="card__header-type pokeFontColor ${singleCartType["type"]["name"]}">${singleCartType["type"]["name"]}</span>
     `;
   }
 }
@@ -76,10 +76,8 @@ function renderSingelPokemonCartTypes(i) {
  * Schaltet in der Detailkarte auf den "About"-Tab.
  */
 function showAbout() {
-  document.getElementById("about").style.fontWeight = "bolder";
-  document.getElementById("about").style.color = "black";
-  document.getElementById("baseStat").style.color = "grey";
-  document.getElementById("baseStat").style.fontWeight = "normal";
+  document.getElementById("about").classList.add("is-active");
+  document.getElementById("baseStat").classList.remove("is-active");
   document.getElementById("tableBaseStats").classList.add("d-none");
   document.getElementById("tableAbout").classList.remove("d-none");
 }
@@ -87,11 +85,9 @@ function showAbout() {
 /**
  * Schaltet in der Detailkarte auf den "Base Stats"-Tab.
  */
-function showBaseStas() {
-  document.getElementById("baseStat").style.fontWeight = "bolder";
-  document.getElementById("baseStat").style.color = "black";
-  document.getElementById("about").style.fontWeight = "normal";
-  document.getElementById("about").style.color = "grey";
+function showBaseStats() {
+  document.getElementById("baseStat").classList.add("is-active");
+  document.getElementById("about").classList.remove("is-active");
   document.getElementById("tableAbout").classList.add("d-none");
   document.getElementById("tableBaseStats").classList.remove("d-none");
 }

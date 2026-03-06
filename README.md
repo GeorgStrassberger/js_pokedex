@@ -1,36 +1,24 @@
-# JS Pokedex
+# Pokedex (Vanilla JavaScript)
 
-Ein clientseitiges Pokedex-Projekt mit Vanilla JavaScript, HTML und CSS.
-Die App laedt Pokemon-Daten aus der [PokeAPI](https://pokeapi.co/) und bietet Suche, Sortierung, Favoriten sowie eine Detailansicht.
+Interaktive Pokedex-Web-App mit Fokus auf saubere UI, gute Lesbarkeit und modularem Frontend-Code.
+Die Anwendung laedt Pokemon-Daten aus der [PokeAPI](https://pokeapi.co/) und bietet Suche, Sortierung, Favoriten und eine Detailansicht.
 
----
+## Live-Funktionen
 
-## Features
-
-- Pokemon-Liste mit Kartenansicht
-- Nachladen in Bloecken oder direkt alle 151 Pokemon laden
-- Paralleles Laden je Block via `Promise.all` (schneller als sequentielle Requests)
-- Suche nach Namen
+- Grid-Ansicht mit den ersten 151 Pokemon
+- Nachladen in Bloecken oder kompletter Schnell-Load
+- Suche nach Namen in Echtzeit
 - Sortierung nach ID oder Name
-- Favoritenmodus (inkl. Toggle im Header)
-- Detailansicht pro Pokemon mit:
-  - Navigation zum naechsten/vorherigen Pokemon
-  - About- und Base-Stats-Tab
-  - Favoriten-Icon
-- Korrektes Oeffnen der Detailansicht ueber Pokemon-ID (stabil nach Sortierung/Filterung)
-- Audio-Funktionen (Theme + Click-Sound)
-- Responsives UI fuer Desktop, Tablet und Mobile
-
----
+- Favoritenmodus inkl. Toggle im Header
+- Detailansicht mit Navigation (vor/zurueck), About- und Base-Stats-Tab
+- Responsives Layout fuer Desktop, Tablet und Mobile
 
 ## Tech Stack
 
 - HTML5
-- CSS3 (modular aufgeteilt in `style/*.css`)
-- Vanilla JavaScript (modular aufgeteilt in `js/*.js`)
-- Externe Datenquelle: PokeAPI
-
----
+- CSS3 (modular in `style/*.css`)
+- Vanilla JavaScript (modular in `js/*.js`)
+- Externe API: PokeAPI
 
 ## Projektstruktur
 
@@ -39,17 +27,17 @@ Die App laedt Pokemon-Daten aus der [PokeAPI](https://pokeapi.co/) und bietet Su
 |- index.html
 |- README.md
 |- js/
-|  |- script.js         # App-Start, Daten laden, globales Rendering
-|  |- template.js       # HTML-Templates fuer Karten und Detailansicht
-|  |- pokemonCart.js    # Logik der Detailansicht
-|  |- search.js         # Suchlogik
-|  |- sortBy.js         # Sortierlogik
-|  |- favorites.js      # Favoritenlogik
-|  |- switchtypes.js    # Typ-Badge/Icon-Mapping
-|  |- loader.js         # Nachladen / Alle laden / Loader-Steuerung
-|  `- pokeSounds.js     # Audiofunktionen
+|  |- script.js
+|  |- template.js
+|  |- pokemonCart.js
+|  |- search.js
+|  |- sortBy.js
+|  |- favorites.js
+|  |- switchtypes.js
+|  |- loader.js
+|  `- pokeSounds.js
 |- style/
-|  |- style.css         # Globales Styling + Variablen
+|  |- style.css
 |  |- header.css
 |  |- footer.css
 |  |- pokedex.css
@@ -63,11 +51,9 @@ Die App laedt Pokemon-Daten aus der [PokeAPI](https://pokeapi.co/) und bietet Su
    `- audio/
 ```
 
----
+## Lokales Starten
 
-## Lokale Nutzung
-
-Da die App mit relativen Pfaden arbeitet, am besten ueber einen lokalen Webserver starten.
+Die App sollte ueber einen lokalen Webserver laufen.
 
 ### Option 1: VS Code Live Server
 
@@ -81,32 +67,31 @@ Da die App mit relativen Pfaden arbeitet, am besten ueber einen lokalen Webserve
 python3 -m http.server 5500
 ```
 
-Dann im Browser aufrufen:
+Dann im Browser oeffnen:
 
 ```text
 http://localhost:5500
 ```
 
----
+## Architektur-Kurzueberblick
 
-## Datenfluss (Kurzueberblick)
+1. `init()` startet den ersten Ladezyklus.
+2. `loadPokedex()` laedt Pokemon blockweise parallel via `Promise.all`.
+3. `renderContent()` aktualisiert Listenansicht und UI-Zustaende.
+4. Feature-Module (`search`, `sort`, `favorites`, `pokemonCart`) steuern Interaktionen.
 
-1. `init()` in `js/script.js` startet beim Laden der Seite.
-2. `loadPokedex()` laedt Pokemon-Daten blockweise und parallel aus der PokeAPI in `myPokemonArray`.
-3. `renderContent()` rendert die Hauptansicht.
-4. Interaktionen (Suche, Sortierung, Favoriten, Detailansicht) aktualisieren die Anzeige ueber Re-Render.
+## Portfolio-Kontext
 
----
+Dieses Projekt zeigt:
 
-## Wichtige globale Zustaende
+- API-Integration im Frontend
+- Zustandshandling ohne Framework
+- komponentenartige Template-Aufteilung mit modularem CSS/JS
+- responsives UI-Design und grundlegende Accessibility-Massnahmen
 
-- `myPokemonArray`: Alle geladenen Pokemon
-- `favoritePokemons` / `favoritePokemonsIdOnly`: Favoritenverwaltung
-- `minCountOfPokemons` / `maxCountentOfPokemons`: Bereich fuer API-Nachladebloecke
-- `isLoading`: Sperre gegen doppelte parallele Ladevorgaenge
+## Moegliche naechste Schritte
 
----
-
-## Hinweise
-
-- Die App ist auf die ersten 151 Pokemon ausgelegt.
+- Persistente Favoriten mit `localStorage`
+- Unit-Tests fuer Utility- und Rendering-Funktionen
+- Tastatursteuerung fuer die Detailansicht (Esc / Pfeiltasten)
+- Pagination-Strategie fuer mehr als 151 Pokemon

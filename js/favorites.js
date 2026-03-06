@@ -29,6 +29,11 @@ function like(i) {
   } else {
     deleteFromFavorites(i);
   }
+
+  if (showFavorites) {
+    renderFavoritesPokemons();
+  }
+
   playClickSound();
 }
 
@@ -37,6 +42,10 @@ function like(i) {
  * @param {number} i Index in `myPokemonArray`.
  */
 function pushToFavorites(i) {
+  if (favoritePokemonsIdOnly.includes(myPokemonArray[i].id)) {
+    return;
+  }
+
   favoritePokemons.push(myPokemonArray[i]);
   favoritePokemonsIdOnly.push(myPokemonArray[i].id);
   document.getElementById(`like_${myPokemonArray[i]["name"]}`).src = "./assets/img/icons/heart-69-24.png";
@@ -47,8 +56,14 @@ function pushToFavorites(i) {
  * @param {number} i Index in `myPokemonArray`.
  */
 function deleteFromFavorites(i) {
-  favoritePokemons.splice(favoritePokemons.indexOf(myPokemonArray[i]), 1);
-  favoritePokemonsIdOnly.splice(favoritePokemonsIdOnly.indexOf(myPokemonArray[i].id), 1);
+  const favoriteIndex = favoritePokemons.findIndex((pokemon) => pokemon.id === myPokemonArray[i].id);
+  const favoriteIdIndex = favoritePokemonsIdOnly.indexOf(myPokemonArray[i].id);
+  if (favoriteIndex !== -1) {
+    favoritePokemons.splice(favoriteIndex, 1);
+  }
+  if (favoriteIdIndex !== -1) {
+    favoritePokemonsIdOnly.splice(favoriteIdIndex, 1);
+  }
   document.getElementById(`like_${myPokemonArray[i]["name"]}`).src = "./assets/img/icons/favorite-3-24.png";
 }
 
@@ -57,12 +72,12 @@ const favLink = document.getElementById("fav-link");
 
 favLink.addEventListener("click", () => {
   if (!showFavorites) {
-    renderFavorietesPokemons();
-    favLink.innerHTML = "Home";
+    renderFavoritesPokemons();
+    favLink.innerHTML = "Zurueck";
     showFavorites = true;
   } else {
     renderPokemonCarts();
-    favLink.innerHTML = "Favorites";
+    favLink.innerHTML = "Favoriten";
     showFavorites = false;
   }
 });
@@ -70,11 +85,13 @@ favLink.addEventListener("click", () => {
 /**
  * Rendert ausschließlich die aktuell gespeicherten Favoriten.
  */
-function renderFavorietesPokemons() {
-  document.getElementById("pokedex").innerHTML = ``;
-  for (let i = 0; i < favoritePokemons.length; i++) {
-    const currentPokemon = favoritePokemons[i];
-    document.getElementById("pokedex").innerHTML += pokemonCartHTML(currentPokemon);
-    renderPokemonTypes(currentPokemon);
+function renderFavoritesPokemons() {
+  if (favoritePokemons.length === 0) {
+    document.getElementById("pokedex").innerHTML =
+      '<div class="no-entry">Du hast noch keine Favoriten ausgewaehlt.</div>';
+    return;
   }
+
+  document.getElementById("pokedex").innerHTML = favoritePokemons.map((pokemon) => pokemonCartHTML(pokemon)).join("");
+  favoritePokemons.forEach((pokemon) => renderPokemonTypes(pokemon));
 }

@@ -154,6 +154,14 @@
 
 .linkframe span {
   cursor: pointer;
+  color: #64748b;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.linkframe span.is-active {
+  color: #0f172a;
+  font-weight: 700;
 }
 
 .linkframe span:hover {

@@ -118,7 +118,7 @@ function renderSinglePokemonCart(i) {
       <div class="statsContainer">
         <div class="linkframe">
           <span id="about" onclick="showAbout()">About</span>
-          <span id="baseStat" onclick="showBaseStas()">Base Stats</span>
+          <span id="baseStat" onclick="showBaseStats()">Base Stats</span>
         </div>
         <div class="tableContainer">
           <table id="tableAbout" class="tableAbout d-none">
@@ -179,6 +179,6 @@ function renderSinglePokemonCart(i) {
 /**
  * Aktualisiert den Text des "Mehr laden"-Buttons abhängig vom Ladelimit.
  */
-function renderLoadingButten() {
-  document.getElementById("morePokemonsBtn").innerText = `+ ${loadMorePokemons} Pokemons`;
+function renderLoadingButton() {
+  document.getElementById("morePokemonsBtn").innerText = `+ ${loadMorePokemons} Pokemon`;
 }

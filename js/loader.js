@@ -6,19 +6,19 @@
  */
 function showMorePokemons() {
   if (myPokemonArray.length >= 151) {
-    alert("Alle Pokemon's wurden geladen !");
+    alert("Alle Pokemon wurden bereits geladen.");
     return;
   }
 
   showLoadingScreen();
 
   if (myPokemonArray.length < 152 - loadMorePokemons) {
-    minCountOfPokemons = maxCountentOfPokemons;
-    maxCountentOfPokemons = maxCountentOfPokemons + loadMorePokemons;
+    minCountOfPokemons = maxCountOfPokemons;
+    maxCountOfPokemons = maxCountOfPokemons + loadMorePokemons;
   } else {
     // Letzter Ladeblock bis Pokemon #151.
-    minCountOfPokemons = maxCountentOfPokemons;
-    maxCountentOfPokemons = 152;
+    minCountOfPokemons = maxCountOfPokemons;
+    maxCountOfPokemons = 152;
   }
 
   loadPokedex();
@@ -29,11 +29,11 @@ function showMorePokemons() {
  */
 function showAllPokemons() {
   if (myPokemonArray.length >= 151) {
-    alert("Alle Pokemon's wurden geladen !");
+    alert("Alle Pokemon wurden bereits geladen.");
   } else {
     showLoadingScreen();
-    minCountOfPokemons = maxCountentOfPokemons;
-    maxCountentOfPokemons = 152;
+    minCountOfPokemons = maxCountOfPokemons;
+    maxCountOfPokemons = 152;
     loadPokedex();
   }
 }

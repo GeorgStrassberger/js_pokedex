@@ -5,6 +5,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content="Interaktives Pokedex mit Suche, Sortierung, Favoriten und Detailansicht auf Basis der PokeAPI." />
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
@@ -32,10 +33,10 @@
 		<script src="./js/favorites.js" defer></script>
 		<script src="./js/sortBy.js" defer></script>
 
-		<noscript>Your browser does not support JavaScript!</noscript>
 	</head>
 
 	<body id="body" onload="init()">
+		<noscript>Diese App benoetigt JavaScript, um Pokemon-Daten zu laden.</noscript>
 		<!-- loader -->
 		<div id="page-loader" class="page-loader">
 			<div class="update-loader">
@@ -50,22 +51,24 @@
 		</div>
 
 		<header id="header" class="header">
-			<img class="header__logo" src="./assets/img/logo.png" alt="PokemonLogo" onclick="sortById()" />
+			<img class="header__logo" src="./assets/img/logo.png" alt="Pokemon Logo" onclick="sortById()" aria-label="Sortierung nach ID" />
 			<nav class="nav">
 				<ul class="nav__list">
-					<li class="nav__list">
-						<input class="nav__search" placeholder="Search name" type="search" name="search" id="search" />
+					<li class="nav__list-item">
+						<label class="sr-only" for="search">Pokemon suchen</label>
+						<input class="nav__search" placeholder="Pokemon suchen" type="search" name="search" id="search" />
 					</li>
-					<li class="nav__list">
-						<div id="selcet-field" class="selcet__container">
+					<li class="nav__list-item">
+						<div id="select-field" class="select__container">
+							<label class="sr-only" for="sort-select">Sortierung</label>
 							<select class="nav__select" name="sort" id="sort-select">
-								<option value="id">Sort Pokemons: ID</option>
-								<option value="name">Sort Pokemons: Name</option>
+								<option value="id">Sortieren: ID</option>
+								<option value="name">Sortieren: Name</option>
 							</select>
 						</div>
 					</li>
 					<li class="nav__list-item">
-						<a id="fav-link" class="link pokefont">Favorites</a>
+						<button id="fav-link" class="link pokefont" type="button" aria-label="Favoriten anzeigen">Favoriten</button>
 					</li>
 				</ul>
 			</nav>
@@ -77,12 +80,12 @@
 		</main>
 
 		<footer id="footer" class="footer">
-			<a id="morePokemonsBtn" class="link pokefont" onclick="showMorePokemons()">
-				+ Pokemons laden
-			</a>
-			<a id="allPokemonsBtn" class="link pokefont" onclick="showAllPokemons()">
-				alle 151 Pokemons
-			</a>
+			<button id="morePokemonsBtn" class="link pokefont" type="button" onclick="showMorePokemons()" aria-label="Weitere Pokemon laden">
+				+ Pokemon laden
+			</button>
+			<button id="allPokemonsBtn" class="link pokefont" type="button" onclick="showAllPokemons()" aria-label="Alle Pokemon laden">
+				Alle 151 Pokemon
+			</button>
 		</footer>
 	</body>
 
