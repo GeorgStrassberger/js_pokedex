@@ -123,13 +123,11 @@ function setLanguage(language) {
   }
 
   currentLanguage = language;
-  localStorage.setItem("pokedexLanguage", language);
   applyTranslations();
 }
 
 function initializeI18n() {
-  const savedLanguage = localStorage.getItem("pokedexLanguage");
-  currentLanguage = translations[savedLanguage] ? savedLanguage : getUserLanguage();
+  currentLanguage = getUserLanguage();
 
   const languageSelect = document.getElementById("lang-select");
   if (languageSelect) {
