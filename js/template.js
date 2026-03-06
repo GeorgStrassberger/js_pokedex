@@ -27,19 +27,19 @@ function pokemonCartHTML(currentPokemon) {
 function renderSinglePokemonCartInfoTableAbout(i) {
   document.getElementById("tableAbout").innerHTML = /*html*/ `
     <tr>
-      <td>Species</td>
+      <td>${t("detail.species")}</td>
       <td>${myPokemonArray[i]["types"][0]["type"]["name"]}</td>
     </tr>
     <tr>
-      <td>Height</td>
+      <td>${t("detail.height")}</td>
       <td>${myPokemonArray[i]["height"]}0 cm</td>
     </tr>
     <tr>
-      <td>Weight</td>
+      <td>${t("detail.weight")}</td>
       <td>${myPokemonArray[i]["weight"]} kg</td>
     </tr>
     <tr>
-      <td>Abilities</td>
+      <td>${t("detail.abilities")}</td>
       <td class="capitalize">${myPokemonArray[i]["abilities"][0]["ability"]["name"]}</td>
     </tr>
   `;
@@ -52,27 +52,27 @@ function renderSinglePokemonCartInfoTableAbout(i) {
 function renderSinglePokemonCartInfoTableBaseStats(i) {
   document.getElementById("tableBaseStats").innerHTML = /*html*/ `
     <tr class="uppercase">
-      <td>${myPokemonArray[i]["stats"][0]["stat"]["name"]}</td>
+      <td>${translateStatName(myPokemonArray[i]["stats"][0]["stat"]["name"])}</td>
       <td>${myPokemonArray[i]["stats"][0]["base_stat"]}</td>
     </tr>
     <tr class="capitalize">
-      <td>${myPokemonArray[i]["stats"][1]["stat"]["name"]}</td>
+      <td>${translateStatName(myPokemonArray[i]["stats"][1]["stat"]["name"])}</td>
       <td>${myPokemonArray[i]["stats"][1]["base_stat"]}</td>
     </tr>
     <tr class="capitalize">
-      <td>${myPokemonArray[i]["stats"][2]["stat"]["name"]}</td>
+      <td>${translateStatName(myPokemonArray[i]["stats"][2]["stat"]["name"])}</td>
       <td>${myPokemonArray[i]["stats"][2]["base_stat"]}</td>
     </tr>
     <tr class="capitalize">
-      <td>${myPokemonArray[i]["stats"][3]["stat"]["name"]}</td>
+      <td>${translateStatName(myPokemonArray[i]["stats"][3]["stat"]["name"])}</td>
       <td>${myPokemonArray[i]["stats"][3]["base_stat"]}</td>
     </tr>
     <tr class="capitalize">
-      <td>${myPokemonArray[i]["stats"][4]["stat"]["name"]}</td>
+      <td>${translateStatName(myPokemonArray[i]["stats"][4]["stat"]["name"])}</td>
       <td>${myPokemonArray[i]["stats"][4]["base_stat"]}</td>
     </tr>
     <tr class="capitalize">
-      <td>${myPokemonArray[i]["stats"][5]["stat"]["name"]}</td>
+      <td>${translateStatName(myPokemonArray[i]["stats"][5]["stat"]["name"])}</td>
       <td>${myPokemonArray[i]["stats"][5]["base_stat"]}</td>
     </tr>
   `;
@@ -87,8 +87,10 @@ function renderSinglePokemonCart(i) {
   <div id="cartframe" class="card ${myPokemonArray[i]["types"][0]["type"]["name"]}">
     <div class="card__header">
       <div class="card__header-btn">
-        <img class="card-btn-like" id="like_${myPokemonArray[i]["name"]}" src="./assets/img/icons/favorite-3-24.png" alt="heart" onclick="like(${i})">
-        <img class="card-btn-close" src="./assets/img/icons/x-mark-48.png" alt="arrowback" onclick="closePokemonCart()">
+        <img class="card-btn-like" id="like_${myPokemonArray[i]["name"]}" src="./assets/img/icons/favorite-3-24.png" alt="${t(
+          "detail.favoriteIcon"
+        )}" onclick="like(${i})">
+        <img class="card-btn-close" src="./assets/img/icons/x-mark-48.png" alt="${t("detail.close")}" onclick="closePokemonCart()">
       </div>
       <div class="card__header-content">
         <div class="card__header-info">
@@ -104,10 +106,10 @@ function renderSinglePokemonCart(i) {
       </div>
       <div class="card__header-images">
         <div class="card-btn-pre" onclick="previousPokemon(${i})">
-          <img src="./assets/img/icons/arrow-105-48.png" alt="previous pokemon">
+          <img src="./assets/img/icons/arrow-105-48.png" alt="${t("detail.previousPokemon")}">
         </div>
         <div class="card-btn-next" onclick="nextPokemon(${i})">
-          <img src="./assets/img/icons/arrow-4-48.png" alt="next pokemon">
+          <img src="./assets/img/icons/arrow-4-48.png" alt="${t("detail.nextPokemon")}">
         </div>
 
         <img class="pokeImgBG" src="./assets/img/pokeball-open.png" alt="pokeball">
@@ -117,25 +119,25 @@ function renderSinglePokemonCart(i) {
     <div class="statsframe">
       <div class="statsContainer">
         <div class="linkframe">
-          <span id="about" onclick="showAbout()">About</span>
-          <span id="baseStat" onclick="showBaseStats()">Base Stats</span>
+          <span id="about" onclick="showAbout()">${t("detail.about")}</span>
+          <span id="baseStat" onclick="showBaseStats()">${t("detail.baseStats")}</span>
         </div>
         <div class="tableContainer">
           <table id="tableAbout" class="tableAbout d-none">
             <tr>
-              <td>Species</td>
+              <td>${t("detail.species")}</td>
               <td>Seed</td>
             </tr>
             <tr>
-              <td>Height</td>
+              <td>${t("detail.height")}</td>
               <td>0.70 cm</td>
             </tr>
             <tr>
-              <td>Weight</td>
+              <td>${t("detail.weight")}</td>
               <td>6.9kg</td>
             </tr>
             <tr>
-              <td>Abilities</td>
+              <td>${t("detail.abilities")}</td>
               <td>Overgrow</td>
             </tr>
           </table>
@@ -180,5 +182,10 @@ function renderSinglePokemonCart(i) {
  * Aktualisiert den Text des "Mehr laden"-Buttons abhängig vom Ladelimit.
  */
 function renderLoadingButton() {
-  document.getElementById("morePokemonsBtn").innerText = `+ ${loadMorePokemons} Pokemon`;
+  document.getElementById("morePokemonsBtn").innerText = t("footer.loadMore", { count: loadMorePokemons });
+
+  const loadAllButton = document.getElementById("allPokemonsBtn");
+  if (loadAllButton) {
+    loadAllButton.innerText = t("footer.loadAll");
+  }
 }

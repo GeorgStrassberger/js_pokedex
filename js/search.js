@@ -33,8 +33,7 @@ function renderSearchedContent(searchValue) {
   });
 
   if (filteredPokemons.length === 0) {
-    document.getElementById("pokedex").innerHTML =
-      '<div class="no-entry">Kein Pokemon mit diesem Namen gefunden.</div>';
+    document.getElementById("pokedex").innerHTML = `<div class="no-entry">${t("messages.noResult")}</div>`;
     return;
   }
 

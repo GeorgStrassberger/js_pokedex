@@ -1,10 +1,14 @@
 "use strict";
 
+/** Merkt den aktuell geöffneten Pokemon-Index für Tastatursteuerung. */
+let currentPokemonIndex = null;
+
 /**
  * Öffnet die Detailansicht für ein Pokemon anhand des Array-Index.
  * @param {number} i Index in `myPokemonArray`.
  */
 function openPokemonCart(i) {
+  currentPokemonIndex = i;
   document.getElementById("body").classList.add("backgroundCard");
   renderSinglePokemonCart(i);
   document.getElementById("pokedex").classList.add("d-none");
@@ -34,10 +38,11 @@ function openPokemonCartById(pokemonId) {
  * Schließt die Detailansicht und zeigt wieder die Hauptansicht.
  */
 function closePokemonCart() {
+  currentPokemonIndex = null;
   document.getElementById("body").classList.remove("backgroundCard");
   document.getElementById("pokedex").classList.remove("d-none");
   document.getElementById("mainframe").classList.add("d-none");
-  document.title = `Pokedex`;
+  document.title = t("appTitle");
 
   showElement("header");
   showElement("footer");
@@ -115,3 +120,34 @@ function previousPokemon(i) {
     openPokemonCart(i - 1);
   }
 }
+
+/**
+ * Tastatursteuerung in der Detailansicht:
+ * - Escape: Detailansicht schließen
+ * - ArrowLeft / ArrowRight: Pokemon wechseln
+ * @param {KeyboardEvent} event
+ */
+function handleDetailViewKeyboard(event) {
+  const isDetailViewOpen = !document.getElementById("mainframe").classList.contains("d-none");
+  if (!isDetailViewOpen || typeof currentPokemonIndex !== "number") {
+    return;
+  }
+
+  if (event.key === "Escape") {
+    closePokemonCart();
+    return;
+  }
+
+  if (event.key === "ArrowRight") {
+    event.preventDefault();
+    nextPokemon(currentPokemonIndex);
+    return;
+  }
+
+  if (event.key === "ArrowLeft") {
+    event.preventDefault();
+    previousPokemon(currentPokemonIndex);
+  }
+}
+
+document.addEventListener("keydown", handleDetailViewKeyboard);

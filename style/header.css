@@ -78,6 +78,16 @@
   text-shadow: 2px 0 #395ba8, -2px 0 #395ba8, 0 2px #395ba8, 0 -2px #395ba8;
 }
 
+.select__container--lang {
+  width: 84px;
+  min-width: 84px;
+}
+
+.select__container--lang .nav__select {
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+}
+
 .select__container::after {
   content: "▾";
   position: absolute;
@@ -159,6 +169,11 @@
 
   .nav__search {
     width: 210px;
+  }
+
+  .select__container--lang {
+    width: 74px;
+    min-width: 74px;
   }
 }
 

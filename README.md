@@ -1,17 +1,36 @@
 # Pokedex (Vanilla JavaScript)
 
-Interaktive Pokedex-Web-App mit Fokus auf saubere UI, gute Lesbarkeit und modularem Frontend-Code.
 Die Anwendung laedt Pokemon-Daten aus der [PokeAPI](https://pokeapi.co/) und bietet Suche, Sortierung, Favoriten und eine Detailansicht.
 
-## Live-Funktionen
+## Live Demo
+
+- Demo: `LINK_EINFUEGEN`
+- Repository: `https://github.com/<dein-user>/<dein-repo>`
+
+## Screenshots
+
+> Ersetze die Platzhalter durch echte Bilder aus deinem Projekt.
+
+![Pokedex Listenansicht](./assets/img/screenshots/pokedex-overview.png)
+![Pokemon Detailansicht](./assets/img/screenshots/pokedex-detail.png)
+
+## Key Features
 
 - Grid-Ansicht mit den ersten 151 Pokemon
 - Nachladen in Bloecken oder kompletter Schnell-Load
 - Suche nach Namen in Echtzeit
 - Sortierung nach ID oder Name
 - Favoritenmodus inkl. Toggle im Header
-- Detailansicht mit Navigation (vor/zurueck), About- und Base-Stats-Tab
+- Detailansicht mit Navigation (Buttons + Keyboard: `Esc`, `ArrowLeft`, `ArrowRight`)
+- i18n-Sprachumschalter (`DE` / `EN`) fuer UI-Texte
 - Responsives Layout fuer Desktop, Tablet und Mobile
+
+## Was technisch geloest wurde
+
+- API-Integration mit parallelen Requests pro Ladeblock via `Promise.all`
+- Modulare Trennung nach Verantwortlichkeiten (`search`, `sort`, `favorites`, `detail`, `loader`, `i18n`)
+- Robustes UI-State-Handling bei Favoriten, Suche und Detailansicht
+- Verbesserte Accessibility-Bausteine (Semantik, Labels, Tastatur-Navigation)
 
 ## Tech Stack
 
@@ -20,6 +39,28 @@ Die Anwendung laedt Pokemon-Daten aus der [PokeAPI](https://pokeapi.co/) und bie
 - Vanilla JavaScript (modular in `js/*.js`)
 - Externe API: PokeAPI
 
+## Lokales Starten
+
+Die App sollte ueber einen lokalen Webserver laufen.
+
+### Option 1: VS Code Live Server
+
+1. Projekt in VS Code oeffnen
+2. Extension "Live Server" installieren
+3. `index.html` mit "Open with Live Server" starten
+
+### Option 2: Python HTTP Server
+
+```bash
+python3 -m http.server 5500
+```
+
+Dann im Browser oeffnen:
+
+```text
+http://localhost:5500
+```
+
 ## Projektstruktur
 
 ```text
@@ -27,6 +68,7 @@ Die Anwendung laedt Pokemon-Daten aus der [PokeAPI](https://pokeapi.co/) und bie
 |- index.html
 |- README.md
 |- js/
+|  |- i18n.js
 |  |- script.js
 |  |- template.js
 |  |- pokemonCart.js
@@ -51,47 +93,8 @@ Die Anwendung laedt Pokemon-Daten aus der [PokeAPI](https://pokeapi.co/) und bie
    `- audio/
 ```
 
-## Lokales Starten
+## Bekannte Limitierungen
 
-Die App sollte ueber einen lokalen Webserver laufen.
-
-### Option 1: VS Code Live Server
-
-1. Projekt in VS Code oeffnen
-2. Extension "Live Server" installieren
-3. `index.html` mit "Open with Live Server" starten
-
-### Option 2: Python HTTP Server
-
-```bash
-python3 -m http.server 5500
-```
-
-Dann im Browser oeffnen:
-
-```text
-http://localhost:5500
-```
-
-## Architektur-Kurzueberblick
-
-1. `init()` startet den ersten Ladezyklus.
-2. `loadPokedex()` laedt Pokemon blockweise parallel via `Promise.all`.
-3. `renderContent()` aktualisiert Listenansicht und UI-Zustaende.
-4. Feature-Module (`search`, `sort`, `favorites`, `pokemonCart`) steuern Interaktionen.
-
-## Portfolio-Kontext
-
-Dieses Projekt zeigt:
-
-- API-Integration im Frontend
-- Zustandshandling ohne Framework
-- komponentenartige Template-Aufteilung mit modularem CSS/JS
-- responsives UI-Design und grundlegende Accessibility-Massnahmen
-
-## Moegliche naechste Schritte
-
-- Persistente Favoriten mit `localStorage`
-- Unit-Tests fuer Utility- und Rendering-Funktionen
-- Tastatursteuerung fuer die Detailansicht (Esc / Pfeiltasten)
-- Pagination-Strategie fuer mehr als 151 Pokemon
+- Datensatz ist bewusst auf die ersten 151 Pokemon begrenzt
+- Favoriten sind aktuell nur im laufenden Browser-Tab verfuegbar (kein `localStorage`)
+- Keine automatisierten Tests eingerichtet

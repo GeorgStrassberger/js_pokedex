@@ -70,16 +70,22 @@ function deleteFromFavorites(i) {
 /** Favoriten-Link im Header (zwischen Favorites/Home umschalten). */
 const favLink = document.getElementById("fav-link");
 
+function updateFavoriteToggleLabel() {
+  const label = showFavorites ? t("header.back") : t("header.favorites");
+  favLink.innerHTML = label;
+  favLink.setAttribute("aria-label", label);
+}
+
 favLink.addEventListener("click", () => {
-  if (!showFavorites) {
+  showFavorites = !showFavorites;
+
+  if (showFavorites) {
     renderFavoritesPokemons();
-    favLink.innerHTML = "Zurueck";
-    showFavorites = true;
   } else {
     renderPokemonCarts();
-    favLink.innerHTML = "Favoriten";
-    showFavorites = false;
   }
+
+  updateFavoriteToggleLabel();
 });
 
 /**
@@ -87,8 +93,7 @@ favLink.addEventListener("click", () => {
  */
 function renderFavoritesPokemons() {
   if (favoritePokemons.length === 0) {
-    document.getElementById("pokedex").innerHTML =
-      '<div class="no-entry">Du hast noch keine Favoriten ausgewaehlt.</div>';
+    document.getElementById("pokedex").innerHTML = `<div class="no-entry">${t("messages.noFavorites")}</div>`;
     return;
   }
 

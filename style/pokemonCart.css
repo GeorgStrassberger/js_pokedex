@@ -195,6 +195,12 @@ td:first-child {
   color: #64748b;
 }
 
+.tableBaseStats td:last-child,
+.tableAbout td:last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
 @media only screen and (max-width: 720px) {
   .mainframe {
     padding: 0.45rem;

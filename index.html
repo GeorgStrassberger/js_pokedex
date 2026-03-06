@@ -23,6 +23,7 @@
 		<link rel="stylesheet" href="./style/helper.css" />
 		<link rel="stylesheet" href="./style/footer.css">
 
+		<script src="./js/i18n.js" defer></script>
 		<script src="./js/template.js" defer></script>
 		<script src="./js/loader.js" defer></script>
 		<script src="./js/script.js" defer></script>
@@ -47,7 +48,7 @@
 				<span></span>
 				<span></span>
 			</div>
-			<h2>Loading Pokemon ...</h2>
+			<h2 id="loader-text">Pokemon werden geladen ...</h2>
 		</div>
 
 		<header id="header" class="header">
@@ -64,6 +65,15 @@
 							<select class="nav__select" name="sort" id="sort-select">
 								<option value="id">Sortieren: ID</option>
 								<option value="name">Sortieren: Name</option>
+							</select>
+						</div>
+					</li>
+					<li class="nav__list-item">
+						<div class="select__container select__container--lang">
+							<label class="sr-only" for="lang-select">Sprache</label>
+							<select class="nav__select" name="language" id="lang-select">
+								<option value="de">DE</option>
+								<option value="en">EN</option>
 							</select>
 						</div>
 					</li>

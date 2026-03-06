@@ -20,6 +20,7 @@ let pokedexHTML = document.getElementById("pokedex");
  * Einstiegspunkt der App (wird via body onload aufgerufen).
  */
 async function init() {
+  initializeI18n();
   await loadPokedex();
 }
 
@@ -56,9 +57,8 @@ async function loadPokedex() {
     console.error("Fehler beim Laden der Pokemon:", error);
     hideLoadingScreen();
     document.getElementById("pokedex").classList.remove("d-none");
-    document.getElementById("pokedex").innerHTML =
-      '<div class="no-entry">Fehler beim Laden. Bitte Seite neu laden.</div>';
-    alert("Beim Laden der Pokemon ist ein Fehler aufgetreten. Bitte versuche es erneut.");
+    document.getElementById("pokedex").innerHTML = `<div class="no-entry">${t("messages.loadErrorInline")}</div>`;
+    alert(t("messages.loadErrorAlert"));
   } finally {
     isLoading = false;
   }

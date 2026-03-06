@@ -6,7 +6,7 @@
  */
 function showMorePokemons() {
   if (myPokemonArray.length >= 151) {
-    alert("Alle Pokemon wurden bereits geladen.");
+    alert(t("messages.allLoaded"));
     return;
   }
 
@@ -29,7 +29,7 @@ function showMorePokemons() {
  */
 function showAllPokemons() {
   if (myPokemonArray.length >= 151) {
-    alert("Alle Pokemon wurden bereits geladen.");
+    alert(t("messages.allLoaded"));
   } else {
     showLoadingScreen();
     minCountOfPokemons = maxCountOfPokemons;
