@@ -70,6 +70,9 @@ function deleteFromFavorites(i) {
 /** Favoriten-Link im Header (zwischen Favorites/Home umschalten). */
 const favLink = document.getElementById("fav-link");
 
+/**
+ * Setzt das Label des Favoriten-Toggles abhängig vom aktuellen Modus.
+ */
 function updateFavoriteToggleLabel() {
   const label = showFavorites ? t("header.back") : t("header.favorites");
   favLink.innerHTML = label;

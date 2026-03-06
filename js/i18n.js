@@ -1,5 +1,6 @@
 "use strict";
 
+/** Verschachtelte Sprach-Texte für DE/EN inklusive UI-, Detail- und Meldungskeys. */
 const translations = {
   de: {
     appTitle: "Pokedex",
@@ -93,17 +94,35 @@ const translations = {
   },
 };
 
+/** Aktuell aktive Sprache der UI (`de` oder `en`). */
 let currentLanguage = "de";
 
+/**
+ * Ermittelt die bevorzugte Sprache aus dem Browser.
+ * @returns {"de"|"en"} Normalisierter Sprachcode.
+ */
 function getUserLanguage() {
   const browserLanguage = navigator.language || "en";
   return browserLanguage.toLowerCase().startsWith("de") ? "de" : "en";
 }
 
+/**
+ * Liest einen verschachtelten Übersetzungseintrag per Punkt-Pfad aus.
+ * @param {"de"|"en"} language Zielsprache.
+ * @param {string} keyPath Punkt-separierter Pfad, z. B. `detail.about`.
+ * @returns {string|undefined} Gefundene Übersetzung oder `undefined`.
+ */
 function getNestedTranslation(language, keyPath) {
   return keyPath.split(".").reduce((value, key) => value?.[key], translations[language]);
 }
 
+/**
+ * Übersetzt einen Key und ersetzt optional Platzhalter wie `{count}`.
+ * Fällt bei fehlenden Keys auf Englisch und danach auf den Key selbst zurück.
+ * @param {string} keyPath Punkt-separierter Übersetzungs-Key.
+ * @param {Record<string, string|number>} [params={}] Platzhalter-Werte.
+ * @returns {string} Aufgelöster UI-Text.
+ */
 function t(keyPath, params = {}) {
   const fallbackLanguage = "en";
   const translation = getNestedTranslation(currentLanguage, keyPath) ?? getNestedTranslation(fallbackLanguage, keyPath) ?? keyPath;
@@ -113,10 +132,20 @@ function t(keyPath, params = {}) {
   }, translation);
 }
 
+/**
+ * Übersetzt einen Stat-Namen aus der API (z. B. `special-attack`).
+ * @param {string} statName API-Stat-Key.
+ * @returns {string} Lokalisierter Stat-Name.
+ */
 function translateStatName(statName) {
   return t(`stats.${statName}`);
 }
 
+/**
+ * Setzt die Sprache, sofern sie im Übersetzungsobjekt vorhanden ist.
+ * Anschließend wird die Oberfläche komplett neu lokalisiert.
+ * @param {"de"|"en"} language Gewünschte Sprache.
+ */
 function setLanguage(language) {
   if (!translations[language]) {
     return;
@@ -126,6 +155,12 @@ function setLanguage(language) {
   applyTranslations();
 }
 
+/**
+ * Initialisiert i18n beim App-Start:
+ * - erkennt Browsersprache
+ * - verbindet den Sprach-Switch
+ * - rendert initial alle Texte
+ */
 function initializeI18n() {
   currentLanguage = getUserLanguage();
 
@@ -138,6 +173,11 @@ function initializeI18n() {
   applyTranslations();
 }
 
+/**
+ * Überträgt alle übersetzbaren Texte/ARIA-Labels in die aktuelle UI.
+ * Aktualisiert außerdem ggf. Such-/Detailansicht, damit bestehender Content
+ * unmittelbar in der gewählten Sprache angezeigt wird.
+ */
 function applyTranslations() {
   document.documentElement.lang = currentLanguage;
   const isDetailViewOpen = !document.getElementById("mainframe")?.classList.contains("d-none");
