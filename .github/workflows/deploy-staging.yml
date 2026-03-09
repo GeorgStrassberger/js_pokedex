@@ -1,0 +1,43 @@
+# Warum so?
+# types: [closed] feuert bei geschlossenem PR
+# mit if github.event.pull_request.merged == true läuft es nur, wenn der PR wirklich gemerged wurde.
+
+name: Deploy Staging
+run-name: ${{ github.actor }} is deploy on staging
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+
+jobs:
+  deploy-staging:
+    name: Deploy to staging
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: Checkout merged code
+        uses: actions/checkout@v5
+        with:
+          ref: main
+
+      - name: SFTP upload to staging
+        uses: Dylan700/sftp-upload-action@latest
+        with:
+          server: ${{ secrets.STRATO_SFTP_HOST }}
+          username: ${{ secrets.STRATO_SFTP_USER }}
+          password: ${{ secrets.STRATO_SFTP_PASSWORD }}
+          port: ${{ secrets.STRATO_SFTP_PORT }}
+          uploads: |
+            ./ => ./${{ secrets.STRATO_SFTP_PATH }}
+          ignore: |
+            *.git
+            *.github
+            */**/*git*
+            README.md
+          delete: "true"
+
+      - run: curl 'https://staging.georg-strassberger.de/' | grep 'pokemon'

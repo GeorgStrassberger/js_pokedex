@@ -1,0 +1,36 @@
+# Das läuft:
+# - bei jedem Push auf jeden Branch
+# - bei jedem PR gegen main
+
+name: CI
+run-name: ${{ github.actor }} is testing
+
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: List files in the repository
+        run: |
+          ls -lah ${{ github.workspace }}
+
+      - name: Run file test
+        run: test -f index.html
+
+      - name: Show file input
+        run: cat index.html
+
+      - name: Job status
+        run: echo "This job's status is ${{ job.status }}."

@@ -1,0 +1,41 @@
+# Dann in GitHub:
+# - Settings → Environments → New environment
+# - Name: production
+# - dort Required reviewers setzen
+# Dann wartet der Job vor dem Prod-Deploy auf Freigabe. GitHub beschreibt genau dieses Verhalten für Jobs, die ein geschütztes Environment referenzieren.
+
+name: Deploy Production
+run-name: ${{ github.actor }} is deploy on prod
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy-prod:
+    name: Deploy to production
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v5
+        with:
+          ref: main
+
+      - name: SFTP upload to production
+        uses: Dylan700/sftp-upload-action@latest
+        with:
+          server: ${{ secrets.STRATO_SFTP_HOST }}
+          username: ${{ secrets.STRATO_SFTP_USER }}
+          password: ${{ secrets.STRATO_SFTP_PASSWORD }}
+          port: ${{ secrets.STRATO_SFTP_PORT }}
+          uploads: |
+            ./ => ./${{ secrets.STRATO_SFTP_PATH }}
+          ignore: |
+            *.git
+            *.github
+            */**/*git*
+            LICENSE
+            README.md
+          delete: "true"
+
+      - run: curl 'https://pokemon.georg-strassberger.de/' | grep 'pokemon'
