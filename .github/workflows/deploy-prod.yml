@@ -38,4 +38,4 @@ jobs:
             README.md
           delete: "true"
 
-      - run: curl 'https://pokemon.georg-strassberger.de/' | grep 'pokemon'
+      - run: curl 'https://pokedex.georg-strassberger.de/' | grep 'pokemon'
