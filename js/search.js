@@ -1,26 +1,42 @@
 "use strict";
 
+/** Globale Referenz auf das Suchfeld im Header. */
 const searchField = document.getElementById("search");
 
-searchField.addEventListener("keyup", searchPokemon);
-searchField.addEventListener("blur", clearInputField);
+searchField.addEventListener("input", searchPokemon);
 
+/**
+ * Liest den aktuellen Suchtext und rendert die gefilterte Pokemon-Liste.
+ */
 function searchPokemon() {
-	let searchValue = searchField.value.toLowerCase();
-	renderSearchedContent(searchValue);
+  const searchValue = searchField.value.trim().toLowerCase();
+  renderSearchedContent(searchValue);
 }
 
+/**
+ * Rendert nur Pokemon-Karten, deren Name den Suchtext enthält.
+ * @param {string} searchValue Kleingeschriebener Suchwert.
+ */
 function renderSearchedContent(searchValue) {
-	document.getElementById("pokedex").innerHTML = ``;
-	for (let i = 0; i < myPokemonArray.length; i++) {
-		const pokemon = myPokemonArray[i];
-		if (pokemon["name"].toLowerCase().includes(searchValue)) {
-			document.getElementById("pokedex").innerHTML += pokemonCartHTML(pokemon);
-		}
-	}
-}
+  if (!searchValue) {
+    if (typeof showFavorites !== "undefined" && showFavorites) {
+      renderFavoritesPokemons();
+    } else {
+      renderPokemonCarts();
+    }
+    return;
+  }
 
-function clearInputField() {
-	searchField.value = "";
-	renderPokemonCarts();
+  const sourcePokemons = typeof showFavorites !== "undefined" && showFavorites ? favoritePokemons : myPokemonArray;
+  const filteredPokemons = sourcePokemons.filter((pokemon) => {
+    return pokemon["name"].toLowerCase().includes(searchValue);
+  });
+
+  if (filteredPokemons.length === 0) {
+    document.getElementById("pokedex").innerHTML = `<div class="no-entry">${t("messages.noResult")}</div>`;
+    return;
+  }
+
+  document.getElementById("pokedex").innerHTML = filteredPokemons.map((pokemon) => pokemonCartHTML(pokemon)).join("");
+  filteredPokemons.forEach((pokemon) => renderPokemonTypes(pokemon));
 }

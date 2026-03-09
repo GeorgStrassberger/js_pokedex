@@ -1,77 +1,108 @@
 .pokedex {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem;
+  align-content: start;
 }
 
 .pokemon-cart {
   text-transform: capitalize;
   position: relative;
-  padding: 8px;
-  margin: 8px;
-  color: black;
-  height: 150px;
-  min-width: 220px;
-  border-radius: 16px;
-  background-image: linear-gradient(145deg,
-      rgba(255, 255, 255, 0.5),
-      transparent 80%);
-  background-repeat: no-repeat;
-  background-position: center center;
+  overflow: hidden;
+  min-height: 186px;
+  color: #f8fbff;
+  border-radius: var(--radius-lg);
+  padding: 0.9rem;
+  background-image: linear-gradient(150deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.05));
+  box-shadow: var(--shadow-md);
+  isolation: isolate;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: box-shadow 0.25s ease;
+}
+
+.pokemon-cart::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(200deg, transparent 40%, rgba(0, 0, 0, 0.18));
+  z-index: -1;
 }
 
 .pokemon-cart:hover {
   cursor: pointer;
-  transform: rotateX(45deg);
-  transform: scaleX(1.01) scaleY(1.01);
-  box-shadow: 10px 10px 5px #aaaaaa;
-  transition: all 125ms ease-in-out;
+  box-shadow: var(--shadow-lg);
 }
 
 .cartHeader {
   display: flex;
   flex-direction: column;
+  gap: 0.35rem;
 }
 
 .cardnr {
   display: flex;
   justify-content: flex-end;
+  font-size: 0.95rem;
 }
 
 .cardname {
   display: flex;
   justify-content: flex-start;
-  margin-top: 4px;
-  margin-bottom: 4px;
+  font-size: 1.35rem;
+  line-height: 1;
 }
 
 .pokemonTypes {
   display: flex;
   flex-direction: column;
-  margin-top: 8px;
+  gap: 0.45rem;
+  margin-top: 0.6rem;
 }
 
 .pokemonType {
-  border: black 1px dotted;
-  font-size: 0.8rem;
-  border-radius: 8px;
-  margin-bottom: 8px;
-  padding: 8px;
-  width: 110px;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  font-size: 0.82rem;
+  border-radius: 999px;
+  padding: 0.3rem 0.6rem;
+  width: fit-content;
+  min-width: 78px;
   text-transform: lowercase;
+  color: #fff;
+  backdrop-filter: blur(2px);
 }
 
 .pokemonType img {
-  width: 16px;
-  margin-right: 8px;
+  width: 14px;
+  margin-right: 0.35rem;
 }
 
 .pokemonImage {
-  background-image: url(../img/pokemon-ball-open.png);
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
   position: absolute;
-  bottom: 0;
-  right: 0;
+  right: 0.25rem;
+  bottom: 0.25rem;
+  width: min(49%, 140px);
+  object-fit: contain;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.28));
+}
+
+@media only screen and (max-width: 1000px) {
+  .pokedex {
+    grid-template-columns: repeat(auto-fit, minmax(205px, 1fr));
+    gap: 0.8rem;
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .pokedex {
+    grid-template-columns: 1fr;
+  }
+
+  .pokemon-cart {
+    min-height: 172px;
+    border-radius: 18px;
+  }
+
+  .cardname {
+    font-size: 1.2rem;
+  }
 }
