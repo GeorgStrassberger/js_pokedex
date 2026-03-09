@@ -4,12 +4,10 @@ Die Anwendung laedt Pokemon-Daten aus der [PokeAPI](https://pokeapi.co/) und bie
 
 ## Live Demo
 
-- Demo: `LINK_EINFUEGEN`
-- Repository: `https://github.com/<dein-user>/<dein-repo>`
+- Demo: `https://pokedex.georg-strassberger.de/`
+- Repository: `https://github.com/GeorgStrassberger/js_pokedex`
 
 ## Screenshots
-
-> Ersetze die Platzhalter durch echte Bilder aus deinem Projekt.
 
 ![Pokedex Listenansicht](./assets/img/screenshots/pokedex-overview.png)
 ![Pokemon Detailansicht](./assets/img/screenshots/pokedex-detail.png)
@@ -38,28 +36,6 @@ Die Anwendung laedt Pokemon-Daten aus der [PokeAPI](https://pokeapi.co/) und bie
 - CSS3 (modular in `style/*.css`)
 - Vanilla JavaScript (modular in `js/*.js`)
 - Externe API: PokeAPI
-
-## Lokales Starten
-
-Die App sollte ueber einen lokalen Webserver laufen.
-
-### Option 1: VS Code Live Server
-
-1. Projekt in VS Code oeffnen
-2. Extension "Live Server" installieren
-3. `index.html` mit "Open with Live Server" starten
-
-### Option 2: Python HTTP Server
-
-```bash
-python3 -m http.server 5500
-```
-
-Dann im Browser oeffnen:
-
-```text
-http://localhost:5500
-```
 
 ## Projektstruktur
 
