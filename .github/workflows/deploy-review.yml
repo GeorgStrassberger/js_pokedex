@@ -1,0 +1,44 @@
+# Das läuft:
+# - wenn PR erstellt wird
+# - wenn neue Commits in den PR gepusht werden
+# - wenn der PR wieder geöffnet wird
+# So hast du immer den aktuellen PR-Stand auf Review.
+
+name: Deploy Review
+run-name: ${{ github.actor }} is deploy on review
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  deploy-review:
+    name: Deploy to review
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: SFTP upload to review
+        uses: Dylan700/sftp-upload-action@latest
+        with:
+          server: ${{ secrets.STRATO_SFTP_HOST }}
+          username: ${{ secrets.STRATO_SFTP_USER }}
+          password: ${{ secrets.STRATO_SFTP_PASSWORD }}
+          port: ${{ secrets.STRATO_SFTP_PORT }}
+          uploads: |
+            ./ => ./cicd/review/
+          ignore: |
+            *.git
+            *.github
+            */**/*git*
+            README.md
+          delete: "true"
+
+      - run: curl 'https://review.georg-strassberger.de/' | grep 'pokemon'
